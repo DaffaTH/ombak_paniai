@@ -1,0 +1,48 @@
+.forum-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.forum-header h1 {
+    font-size: 2.2rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.forum-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+}
+
+.coming-soon i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.coming-soon h2 {
+    font-size: 1.8rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.coming-soon p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}

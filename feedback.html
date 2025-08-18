@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Pembinaan Statistik Sektoral</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/feedback.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <div class="title">
+                <h1>OPD Mandiri Membangun Statistik</h1>
+                <p>Kabupaten Paniai</p>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="monitoring.html">Publikasi</a></li>
+                <li><a href="pedoman.html">Pedoman</a></li>
+                <li><a href="materi.html">Materi Pembinaan</a></li>
+                <li><a href="dokumentasi.html">Dokumentasi</a></li>
+                <li><a href="feedback.html" class="active">Feedback</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="forum.html">Forum SDI</a></li>
+                <li><a href="insight.html">Data Insight</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="feedback-header">
+            <h1>Feedback Pembinaan</h1>
+            <p>Masukan dan tingkat kepuasan peserta pembinaan statistik sektoral</p>
+        </section>
+
+        <section class="feedback-content">
+            <div class="feedback-form">
+                <h2>Berikan Feedback Anda</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="opd">OPD/Instansi</label>
+                        <select id="opd" name="opd" required>
+                            <option value="">Pilih OPD/Instansi</option>
+                            <option value="Dinas Kesehatan">Dinas Kesehatan</option>
+                            <option value="Dinas Pendidikan">Dinas Pendidikan</option>
+                            <option value="Dinas Pekerjaan Umum">Dinas Pekerjaan Umum</option>
+                            <option value="Dinas Sosial">Dinas Sosial</option>
+                            <option value="Dinas Perhubungan">Dinas Perhubungan</option>
+                            <option value="Badan Perencanaan Pembangunan Daerah">Badan Perencanaan Pembangunan Daerah</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating Kepuasan</label>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Komentar/Saran</label>
+                        <textarea id="comments" name="comments" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Kirim Feedback</button>
+                </form>
+            </div>
+
+            <!-- In the feedback-stats section, remove the controls div -->
+<div class="feedback-stats">
+    <h2>Statistik Feedback</h2>
+    <div class="chart-container">
+        <canvas id="feedbackChart"></canvas>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Feedback</h3>
+            <p class="stat-value" id="total-feedback">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Rata-rata Rating</h3>
+            <p class="stat-value" id="avg-rating">0</p>
+        </div>
+    </div>
+    <div class="recent-feedback">
+        <h3>Feedback Terakhir</h3>
+        <div class="feedback-list">
+            <!-- Feedback items will be added here by JavaScript -->
+        </div>
+        <!-- Controls will be inserted here by JavaScript -->
+    </div>
+</div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <div class="footer-branding">
+                    <img src="images/bps.png" alt="Logo Instansi" class="footer-logo">
+                    <div class="footer-identity">
+                        <h3>BPS Kabupaten Paniai</h3>
+                        <p>Kompleks Perkantoran Gang 3 No.4 Madi, Badauwo, Paniai Tim., Kabupaten Paniai, Papua Tengah 98781</p>
+                        <p>Telp: 082197642995</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="monitoring.html">Publikasi</a></li>
+                    <li><a href="pedoman.html">Pedoman</a></li>
+                    <li><a href="materi.html">Materi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h3>Media Sosial</h3>
+                <div class="social-icons">
+                    <a href="https://paniaikab.bps.go.id/id" title="Website Paniai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://deiyaikab.bps.go.id/id" title="Website Deiyai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://intanjayakab.bps.go.id/id" title="Website Intan Jaya" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/bpspaniai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@bpspaniai?is_from_webapp=1&sender_device=pc" title="TikTok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=6282197642995&text&type=phone_number&app_absent=0" title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MDTH.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/feedback.js"></script>
+</body>
+</html>
