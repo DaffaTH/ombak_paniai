@@ -1,18 +1,32 @@
 // Mobile Navigation
 const burger = document.querySelector('.burger');
-const nav = document.querySelector('nav ul');
+const nav = document.querySelector('nav');
+const navLinks = document.querySelectorAll('nav ul li a');
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
 
 burger.addEventListener('click', () => {
     nav.classList.toggle('active');
     burger.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.classList.toggle('no-scroll');
 });
 
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll('nav ul li a');
+// Close mobile menu when clicking on overlay or link
+overlay.addEventListener('click', () => {
+    nav.classList.remove('active');
+    burger.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+});
+
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('active');
         burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
     });
 });
 
@@ -24,18 +38,14 @@ navLinks.forEach(link => {
     }
 });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Sticky header on scroll
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    header.classList.toggle('sticky', window.scrollY > 0);
+// Prevent scrolling when menu is open
+document.addEventListener('DOMContentLoaded', () => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .no-scroll {
+            overflow: hidden;
+            height: 100%;
+        }
+    `;
+    document.head.appendChild(style);
 });

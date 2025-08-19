@@ -366,6 +366,56 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+    header {
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    .title h1 {
+        font-size: 1.2rem;
+    }
+
+    .burger {
+        display: block;
+        cursor: pointer;
+        order: 2; /* Pindahkan ke sebelah kanan */
+    }
+
+    .burger div {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-color);
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Mulai dari sebelah kanan */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--white);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+        z-index: 1001;
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 2rem 2rem;
+        height: 100%;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+    
     nav ul {
         position: fixed;
         top: 80px;
@@ -385,6 +435,38 @@ footer {
 
     nav ul li {
         margin: 1.5rem 0;
+    }
+
+    /* Animasi burger menjadi X */
+    .burger.active .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.active .line2 {
+        opacity: 0;
+    }
+
+    .burger.active .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Overlay ketika menu aktif */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
     }
 
     .hero {
