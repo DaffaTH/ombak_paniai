@@ -9,6 +9,7 @@
     --white: #fff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --nav-bg: rgba(255, 255, 255, 0.95);
 }
 
 * {
@@ -32,10 +33,24 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    padding: 1rem 2rem;
+    padding: 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+}
+
+/* Desktop Header */
+.desktop-header {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+/* Mobile Header (hidden by default) */
+.mobile-header {
+    display: none;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
 }
 
 .logo-container {
@@ -44,18 +59,22 @@ header {
 }
 
 .logo {
-    height: 50px;
+    height: 40px;
     margin-right: 1rem;
 }
 
 .title h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
 }
 
 .title p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
+}
+
+nav {
+    transition: all 0.5s ease;
 }
 
 nav ul {
@@ -99,6 +118,7 @@ nav ul li a:hover:after, nav ul li a.active:after {
     display: none;
     cursor: pointer;
     z-index: 1002;
+    margin-right: 1rem;
 }
 
 .burger div {
@@ -379,8 +399,11 @@ footer {
 
     .burger {
         display: block;
-        cursor: pointer;
-        order: 2; /* Pindahkan ke sebelah kanan */
+        order: -1; /* Pindahkan ke sebelah kanan */
+    }
+
+    .desktop-header {
+        display: none;
     }
 
     .burger div {
@@ -394,23 +417,27 @@ footer {
     nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Mulai dari sebelah kanan */
-        width: 70%;
+        left: -100%; /* Mulai dari sebelah kiri */
+        width: 80%;
         height: 100vh;
-        background-color: var(--white);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        background-color: var(--nav-bg);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
         z-index: 1001;
-        padding-top: 80px;
+        padding: 0;
     }
 
     nav.active {
-        right: 0;
+        left: 0;
+    }
+
+    .mobile-header {
+        display: block;
     }
 
     .nav-links {
         flex-direction: column;
         align-items: flex-start;
-        padding: 80px 2rem 2rem;
+        padding: 0 1rem;
         height: 100%;
     }
 
@@ -418,32 +445,36 @@ footer {
         margin: 1.5rem 0;
     }
 
-    nav ul li {
-        margin: 1.5rem 0;
+    nav ul li a {
+        font-size: 1rem;
+        padding: 0.5rem;
+        display: block;
     }
 
     /* Animasi burger menjadi X */
     .burger.active .line1 {
         transform: rotate(-45deg) translate(-5px, 6px);
     }
+
     .burger.active .line2 {
         opacity: 0;
     }
+
     .burger.active .line3 {
         transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
     }
 
     .overlay.active {
