@@ -48,4 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> b5d3c8158960aa94049e5da14d2ae34508278015
