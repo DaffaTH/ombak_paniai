@@ -513,6 +513,11 @@
         @media screen and (max-width: 768px) {
             header {
                 padding: 0.8rem 1rem;
+                flex-wrap: wrap; /* Tambahkan ini agar elemen header dapat wrap */
+            }
+
+            .logo-container {
+            max-width: 85%; /* Perbesar max-width untuk logo container */
             }
 
             .title h1 {
@@ -523,8 +528,12 @@
             }
 
             .title p {
-                font-size: 0.7rem;
-                display: none;
+            font-size: 0.7rem;
+            display: block !important; /* Pastikan ditampilkan */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px; /* Batasi lebar maksimum */
             }
 
             .desktop-nav {
@@ -533,7 +542,7 @@
 
             .burger {
                 display: block;
-                margin-right: 1rem;
+                margin-right: 0.5rem; /* Kurangi margin untuk menghemat ruang */
             }
 
             .mobile-nav-header .title p {
@@ -543,9 +552,9 @@
             }
 
             .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem 0;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
             }
 
             .hero-image {
@@ -587,9 +596,13 @@
         
         @media screen and (max-width: 480px) {
             .title h1 {
-                font-size: 0.85rem;
+                font-size: 0.8rem; /* Perkecil sedikit font size */
             }
             
+            .burger {
+            margin-right: 0.3rem; /* Kurangi margin lagi */
+            }
+
             .hero-image img {
                 max-width: 48%;
             }
@@ -604,3 +617,19 @@
             overflow: hidden;
             height: 100%;
         }
+
+        /* Untuk memastikan logo container tidak melebihi header */
+    @media screen and (max-width: 360px) {
+    .logo-container {
+        max-width: 80%;
+    }
+    
+    .title h1 {
+        font-size: 0.75rem;
+    }
+    
+    .title p {
+        font-size: 0.6rem;
+        max-width: 100px;
+    }
+    }
