@@ -53,6 +53,10 @@
         .title h1 {
             font-size: 1.2rem;
             color: var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
         }
 
         .title p {
@@ -242,6 +246,12 @@
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .cta-button.monitoring {
+            font-size: 1rem;
         }
 
         .cta-button:hover {
@@ -466,7 +476,8 @@
             }
 
             .title h1 {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                max-width: 150px;
             }
 
             .title p {
@@ -501,11 +512,14 @@
             }
 
             .hero-image {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
             }
             
             .hero-image img {
-                max-width: 80%;
+                max-width: 45%;
+                height: auto;
             }
 
             .hero-content {
@@ -514,7 +528,13 @@
             }
 
             .cta-buttons {
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button.monitoring {
+                font-size: 0.9rem;
+                padding: 0.7rem 1rem;
             }
 
             .footer-logo-container {
@@ -525,6 +545,22 @@
             
             .footer-logo {
                 margin-bottom: 10px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .title h1 {
+                font-size: 0.8rem;
+                max-width: 120px;
+            }
+            
+            .hero-image img {
+                max-width: 48%;
+            }
+            
+            .cta-button.monitoring {
+                font-size: 0.8rem;
+                padding: 0.6rem 0.8rem;
             }
         }
 
