@@ -22,6 +22,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-color);
+    overflow-x: hidden;
 }
 
 header {
@@ -97,6 +98,7 @@ nav ul li a:hover:after, nav ul li a.active:after {
 .burger {
     display: none;
     cursor: pointer;
+    z-index: 1002;
 }
 
 .burger div {
@@ -104,7 +106,7 @@ nav ul li a:hover:after, nav ul li a.active:after {
     height: 3px;
     background-color: var(--text-color);
     margin: 5px;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 main {
@@ -397,8 +399,8 @@ footer {
         height: 100vh;
         background-color: var(--white);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s ease;
         z-index: 1001;
+        padding-top: 80px;
     }
 
     nav.active {
@@ -413,7 +415,7 @@ footer {
     }
 
     .nav-links li {
-        margin: 1rem 0;
+        margin: 1.5rem 0;
     }
 
     nav ul li {
@@ -421,16 +423,14 @@ footer {
     }
 
     /* Animasi burger menjadi X */
-    .burger .line1.active {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    .burger.active .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
     }
-
-    .burger .line2.active {
-    opacity: 0;
+    .burger.active .line2 {
+        opacity: 0;
     }
-
-    .burger .line3.active {
-    transform: rotate(45deg) translate(-5px, -6px);
+    .burger.active .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .overlay {
