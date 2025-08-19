@@ -11,6 +11,11 @@ burger.addEventListener('click', () => {
     burger.classList.toggle('active');
     overlay.classList.toggle('active');
     document.body.classList.toggle('no-scroll');
+    
+    // Tambahkan ini untuk animasi burger
+    burger.querySelector('.line1').classList.toggle('active');
+    burger.querySelector('.line2').classList.toggle('active');
+    burger.querySelector('.line3').classList.toggle('active');
 });
 
 // Close mobile menu when clicking on overlay or link

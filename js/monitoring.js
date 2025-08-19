@@ -28,43 +28,75 @@ function loadPembinaanData() {
     const pembinaanData = [
         { 
             id: 1, 
-            opd: "Dinas Kesehatan", 
-            publikasi: "Laporan Tahunan Kesehatan 2023", 
-            tanggal: "2024-05-15", 
+            opd: "Dinas Pendidikan", 
+            publikasi: "Profil Pendidikan Kabupaten Paniai 2024", 
+            tanggal: "2025-08-18", 
             status: "sudah",
-            driveLink: "https://drive.google.com/file/d/1abc123/view?usp=sharing"
+            driveLink: "https://drive.google.com/file/d/17w2xw-riydNwsVZaKuUVcfCtVKKG2YOB/view?usp=sharing"
         },
         { 
             id: 2, 
-            opd: "Dinas Pendidikan", 
-            publikasi: "Statistik Pendidikan Dasar 2023", 
-            tanggal: "2025-06-20", 
-            status: "belum",
-            driveLink: "https://drive.google.com/file/d/2def456/view?usp=sharing"
+            opd: "Dinas Pekerjaan Umum dan Tata Ruang", 
+            publikasi: "Profil Panjang Jalan Kabupaten Pendidikan 2024", 
+            tanggal: "2025-08-18", 
+            status: "sudah",
+            driveLink: "https://drive.google.com/file/d/1kcj3vw1kPEzLUx28N1YKSr1HayP_UykI/view?usp=drive_link"
         },
         { 
             id: 3, 
-            opd: "Dinas PUPR", 
-            publikasi: "Infrastruktur Kabupaten 2023", 
-            tanggal: "2025-07-10", 
-            status: "belum",
-            driveLink: "https://drive.google.com/file/d/3ghi789/view?usp=sharing"
+            opd: "Dinas Perikanan", 
+            publikasi: "Profil Perikanan Kabupaten Paniai 2024", 
+            tanggal: "2025-08-18", 
+            status: "sudah",
+            driveLink: "https://drive.google.com/file/d/1qh-iU1U5CbEaR9ZQgfsUaxIIfMSfvepp/view?usp=drive_link"
         },
         { 
             id: 4, 
-            opd: "Dinas Kesehatan", 
-            publikasi: "Evaluasi Program Kesehatan 2023", 
-            tanggal: "2024-04-05", 
+            opd: "Badan Pengelolaan Keuangan dan Aset Daerah", 
+            publikasi: "Profil Keuangan dan Aset Daerah Kabupaten Paniai 2024", 
+            tanggal: "2025-08-18", 
             status: "sudah",
-            driveLink: "https://drive.google.com/file/d/4jkl012/view?usp=sharing"
+            driveLink: "https://drive.google.com/file/d/1u6QhyAPw-cvXv8vCC4U7WAkuinDmtVae/view?usp=drive_link"
         },
         { 
             id: 5, 
-            opd: "Dinas Pertanian", 
-            publikasi: "Data Produksi Pertanian 2023", 
-            tanggal: "2024-08-12", 
+            opd: "Badan Kepegawaian Daerah", 
+            publikasi: "Profil Aparatur Sipil Negara Kabupaten Paniai 2024", 
+            tanggal: "", 
+            status: "belum",
+            driveLink: ""
+        },
+        { 
+            id: 6, 
+            opd: "Dinas Kesehatan", 
+            publikasi: "Profil Kesehatan Kabupaten Paniai 2024", 
+            tanggal: "", 
+            status: "belum",
+            driveLink: ""
+        },
+        { 
+            id: 7, 
+            opd: "Dinas Kependudukan dan Pencatatan Sipil", 
+            publikasi: "Profil Kependudukan Kabupaten Paniai 2024", 
+            tanggal: "", 
+            status: "belum",
+            driveLink: ""
+        },
+        { 
+            id: 8, 
+            opd: "Badan Pendapatan Daerah", 
+            publikasi: "Profil Pendapatan Daerah Kabupaten Paniai 2024", 
+            tanggal: "2025-08-18", 
             status: "sudah",
-            driveLink: "https://drive.google.com/file/d/5mno345/view?usp=sharing"
+            driveLink: "https://drive.google.com/file/d/1B9e5TvZ6lq-gxX3LqcchmP2NscTcWtKO/view?usp=drive_link"
+        },
+        { 
+            id: 9, 
+            opd: "Inspektorat", 
+            publikasi: "Kompilasi Data Pemeriksaan Reguler Kabupaten Paniai 2024", 
+            tanggal: "", 
+            status: "belum",
+            driveLink: ""
         }
     ];
 
