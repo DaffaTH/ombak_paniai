@@ -25,12 +25,12 @@
         
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html" class="active">Beranda</a></li>
+                <li><a href="index.html">Beranda</a></li>
                 <li><a href="monitoring.html">Monitoring dan Publikasi</a></li>
                 <li><a href="pedoman.html">Pedoman</a></li>
                 <li><a href="materi.html">Materi Pembinaan</a></li>
                 <li><a href="dokumentasi.html">Dokumentasi</a></li>
-                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="feedback.html" class="active">Feedback</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="forum.html">Forum SDI</a></li>
                 <li><a href="insight.html">Data Insight</a></li>
@@ -113,30 +113,28 @@
                 </form>
             </div>
 
-            <!-- In the feedback-stats section, remove the controls div -->
-<div class="feedback-stats">
-    <h2>Statistik Feedback</h2>
-    <div class="chart-container">
-        <canvas id="feedbackChart"></canvas>
-    </div>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Total Feedback</h3>
-            <p class="stat-value" id="total-feedback">0</p>
-        </div>
-        <div class="stat-card">
-            <h3>Rata-rata Rating</h3>
-            <p class="stat-value" id="avg-rating">0</p>
-        </div>
-    </div>
-    <div class="recent-feedback">
-        <h3>Feedback Terakhir</h3>
-        <div class="feedback-list">
-            <!-- Feedback items will be added here by JavaScript -->
-        </div>
-        <!-- Controls will be inserted here by JavaScript -->
-    </div>
-</div>
+            <div class="feedback-stats">
+                <h2>Statistik Feedback</h2>
+                <div class="chart-container">
+                    <canvas id="feedbackChart"></canvas>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Feedback</h3>
+                        <p class="stat-value" id="total-feedback">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Rata-rata Rating</h3>
+                        <p class="stat-value" id="avg-rating">0</p>
+                    </div>
+                </div>
+                <div class="recent-feedback">
+                    <h3>Feedback Terakhir</h3>
+                    <div class="feedback-list">
+                        <!-- Feedback items will be added here by JavaScript -->
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -156,7 +154,7 @@
                 <h3>Tautan Cepat</h3>
                 <ul>
                     <li><a href="index.html">Beranda</a></li>
-                    <li><a href="monitoring.html">Publikasi</a></li>
+                    <li><a href="monitoring.html">Monitoring dan Publikasi</a></li>
                     <li><a href="pedoman.html">Pedoman</a></li>
                     <li><a href="materi.html">Materi</a></li>
                 </ul>

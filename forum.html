@@ -25,14 +25,14 @@
         
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html" class="active">Beranda</a></li>
+                <li><a href="index.html">Beranda</a></li>
                 <li><a href="monitoring.html">Monitoring dan Publikasi</a></li>
                 <li><a href="pedoman.html">Pedoman</a></li>
                 <li><a href="materi.html">Materi Pembinaan</a></li>
                 <li><a href="dokumentasi.html">Dokumentasi</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <li><a href="forum.html">Forum SDI</a></li>
+                <li><a href="forum.html" class="active">Forum SDI</a></li>
                 <li><a href="insight.html">Data Insight</a></li>
             </ul>
         </nav>
@@ -65,54 +65,89 @@
 
     <main>
         <section class="forum-header">
-            <h1>Forum Satu Data Indonesia</h1>
-            <p>Platform diskusi untuk pengelola data statistik sektoral Kabupaten Paniai</p>
+            <h1>Portal Satu Data Indonesia</h1>
+            <p>Akses langsung ke website resmi Satu Data Indonesia untuk informasi statistik terbaru</p>
         </section>
 
-        <section class="coming-soon">
-            <i class="fas fa-cogs"></i>
-            <h2>Fitur Sedang Dalam Pengembangan</h2>
-            <p>Forum Satu Data Indonesia akan segera hadir untuk memfasilitasi diskusi dan tanya jawab seputar statistik sektoral. Fitur ini akan memungkinkan Anda untuk berinteraksi dengan pengelola data dari OPD lain dan tim pembina statistik.</p>
+        <section class="data-go-id-container">
+            <div class="iframe-controls">
+                <button id="refreshBtn" class="control-btn">
+                    <i class="fas fa-sync-alt"></i> Muat Ulang
+                </button>
+                <button id="openNewBtn" class="control-btn">
+                    <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
+                </button>
+                <div class="url-display">
+                    <i class="fas fa-link"></i> https://data.go.id/
+                </div>
+            </div>
+            
+            <div class="iframe-wrapper">
+                <iframe 
+                    id="dataGoIdFrame" 
+                    src="https://data.go.id/" 
+                    title="Portal Satu Data Indonesia"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+                <div id="loadingOverlay" class="loading-overlay">
+                    <div class="loading-spinner"></div>
+                    <p>Memuat Portal Satu Data Indonesia...</p>
+                </div>
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Tidak dapat memuat konten</h3>
+                    <p>Website https://data.go.id/ tidak dapat dimuat dalam iframe. Silakan klik tombol di bawah untuk membuka di tab baru.</p>
+                    <button id="openExternalBtn" class="control-btn">
+                        <i class="fas fa-external-link-alt"></i> Buka data.go.id
+                    </button>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> Informasi</h3>
+                <p>Portal Satu Data Indonesia (data.go.id) adalah platform resmi yang menyediakan data terbuka dari berbagai instansi pemerintah. Anda dapat menjelajahi berbagai dataset statistik yang tersedia.</p>
+            </div>
         </section>
     </main>
 
     <footer>
-    <div class="footer-content">
-        <div class="footer-section about">
-            <div class="footer-branding">
-                <img src="images/bps.png" alt="Logo Instansi" class="footer-logo">
-                <div class="footer-identity">
-                    <h3>BPS Kabupaten Paniai</h3>
-                    <p>Kompleks Perkantoran Gang 3 No.4 Madi, Badauwo, Paniai Tim., Kabupaten Paniai, Papua Tengah 98781</p>
-                    <p>Telp: 082197642995</p>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <div class="footer-branding">
+                    <img src="images/bps.png" alt="Logo Instansi" class="footer-logo">
+                    <div class="footer-identity">
+                        <h3>BPS Kabupaten Paniai</h3>
+                        <p>Kompleks Perkantoran Gang 3 No.4 Madi, Badauwo, Paniai Tim., Kabupaten Paniai, Papua Tengah 98781</p>
+                        <p>Telp: 082197642995</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="monitoring.html">Monitoring dan Publikasi</a></li>
+                    <li><a href="pedoman.html">Pedoman</a></li>
+                    <li><a href="materi.html">Materi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h3>Media Sosial</h3>
+                <div class="social-icons">
+                    <a href="https://paniaikab.bps.go.id/id" title="Website Paniai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://deiyaikab.bps.go.id/id" title="Website Deiyai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://intanjayakab.bps.go.id/id" title="Website Intan Jaya" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                    <a href="https://www.instagram.com/bpspaniai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@bpspaniai?is_from_webapp=1&sender_device=pc" title="TikTok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=6282197642995&text&type=phone_number&app_absent=0" title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-        <div class="footer-section links">
-            <h3>Tautan Cepat</h3>
-            <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="monitoring.html">Publikasi</a></li>
-                <li><a href="pedoman.html">Pedoman</a></li>
-                <li><a href="materi.html">Materi</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MDTH.</p>
         </div>
-        <div class="footer-section social">
-            <h3>Media Sosial</h3>
-         <div class="social-icons">
-            <a href="https://paniaikab.bps.go.id/id" title="Website Paniai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
-            <a href="https://deiyaikab.bps.go.id/id" title="Website Deiyai" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
-            <a href="https://intanjayakab.bps.go.id/id" title="Website Intan Jaya" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
-            <a href="https://www.instagram.com/bpspaniai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@bpspaniai?is_from_webapp=1&sender_device=pc" title="TikTok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
-            <a href="https://api.whatsapp.com/send/?phone=6282197642995&text&type=phone_number&app_absent=0" title="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2025 MDTH.</p>
-    </div>
-</footer>
+    </footer>
 
     <script src="js/main.js"></script>
     <script src="js/forum_sdi.js"></script>

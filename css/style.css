@@ -517,27 +517,33 @@ footer {
 @media screen and (max-width: 768px) {
     header {
         padding: 0.8rem 1rem;
-        flex-wrap: wrap; /* Tambahkan ini agar elemen header dapat wrap */
+        flex-wrap: wrap;
     }
 
     .logo-container {
-    max-width: 85%; /* Perbesar max-width untuk logo container */
+        max-width: 100%; /* Ubah menjadi 100% agar tulisan header muncul semua */
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
     }
 
     .title h1 {
-        font-size: 0.9rem;
+        font-size: 1rem; /* Perbesar font size untuk mobile */
         max-width: none;
-        white-space: nowrap;
+        white-space: normal; /* Ubah dari nowrap ke normal */
         overflow: visible;
+        text-overflow: clip;
+        margin-bottom: 0.5rem;
     }
 
     .title p {
-    font-size: 0.7rem;
-    display: block !important; /* Pastikan ditampilkan */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 150px; /* Batasi lebar maksimum */
+        font-size: 0.8rem;
+        display: block !important;
+        white-space: normal; /* Ubah dari nowrap ke normal */
+        overflow: visible;
+        text-overflow: clip;
+        max-width: none;
     }
 
     .desktop-nav {
@@ -546,7 +552,10 @@ footer {
 
     .burger {
         display: block;
-        margin-right: 0.5rem; /* Kurangi margin untuk menghemat ruang */
+        position: absolute;
+        left: 1rem;
+        top: 1.5rem;
+        margin-right: 0;
     }
 
     .mobile-nav-header .title p {
@@ -556,15 +565,24 @@ footer {
     }
 
     .hero {
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
-        gap: 10px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 2rem;
+        order: 1; /* Pastikan konten hero di atas gambar */
     }
 
     .hero-image {
         flex-direction: row;
         justify-content: center;
         gap: 10px;
+        order: 3; /* Pastikan gambar di bawah tombol */
+        margin-top: 2rem;
     }
     
     .hero-image img {
@@ -572,14 +590,11 @@ footer {
         height: auto;
     }
 
-    .hero-content {
-        padding-right: 0;
-        margin-bottom: 2rem;
-    }
-
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        order: 2; /* Tombol di antara konten dan gambar */
+        margin-bottom: 2rem;
     }
     
     .cta-button.monitoring {
@@ -600,15 +615,21 @@ footer {
 
 @media screen and (max-width: 480px) {
     .title h1 {
-        font-size: 0.8rem; /* Perkecil sedikit font size */
+        font-size: 0.9rem;
     }
     
     .burger {
-    margin-right: 0.3rem; /* Kurangi margin lagi */
+        left: 0.8rem;
+        top: 1.2rem;
     }
 
+    .hero-image {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
     .hero-image img {
-        max-width: 48%;
+        max-width: 70%;
     }
     
     .cta-button.monitoring {
@@ -624,12 +645,15 @@ footer {
 
 /* Untuk memastikan logo container tidak melebihi header */
 @media screen and (max-width: 360px) {
-.title h1 {
-    font-size: 0.75rem;
-}
+    .title h1 {
+        font-size: 0.85rem;
+    }
 
-.title p {
-    font-size: 0.6rem;
-    max-width: 100px;
-}
+    .title p {
+        font-size: 0.7rem;
+    }
+    
+    .hero-image img {
+        max-width: 80%;
+    }
 }
