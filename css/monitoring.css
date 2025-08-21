@@ -123,6 +123,9 @@ tr:hover {
     border-radius: 4px;
     font-size: 0.8em;
     color: white;
+    display: inline-block;
+    text-align: center;
+    min-width: 60px;
 }
 
 .status.completed {
@@ -205,6 +208,84 @@ tr:hover {
     margin-top: 2rem;
 }
 
+/* Style khusus untuk semua header tabel */
+#pembinaan-table th,
+#metadata-table th,
+#rekomendasi-table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Style khusus untuk tabel metadata dan rekomendasi */
+#metadata-table th[rowspan="2"]:first-child,
+#rekomendasi-table th[rowspan="2"]:first-child {
+    vertical-align: middle;
+}
+
+#metadata-table th[colspan="5"],
+#rekomendasi-table th[colspan="4"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Modifikasi untuk membuat status berada di tengah */
+#pembinaan-table td:nth-child(5),
+#metadata-table td.status-cell,
+#rekomendasi-table td.status-cell {
+    text-align: center;
+}
+
+/* Style untuk sel yang berisi status */
+.status-cell {
+    text-align: center;
+}
+
+/* Style untuk tombol unduh agar berada di tengah */
+#pembinaan-table td:nth-child(6) {
+    text-align: center;
+}
+
+/* Modifikasi untuk membuat semua header tabel publikasi di tengah */
+#pembinaan-table th {
+    text-align: center;
+}
+
+/* Modifikasi untuk membuat semua isi tabel publikasi di tengah */
+#pembinaan-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Kecuali kolom Nama Publikasi dan Tanggal agar tetap rata kiri */
+#pembinaan-table td:nth-child(2),
+#pembinaan-table td:nth-child(3),
+#pembinaan-table td:nth-child(4) {
+    text-align: left;
+}
+
+/* Style untuk header tahun */
+.year-header {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.sub-header {
+    text-align: center;
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+/* PERBAIKAN: Pastikan kolom Disetujui di metadata menggunakan warna hijau yang sama */
+#metadata-table .status.completed {
+    background-color: #2ecc71; /* Hijau untuk status sudah */
+}
+
+#metadata-table .status.pending {
+    background-color: #e74c3c; /* Merah untuk status belum */
+}
+
 @media screen and (max-width: 768px) {
     .tab-buttons {
         flex-direction: column;
@@ -216,5 +297,46 @@ tr:hover {
     
     .filter-section, .quality-filters {
         flex-direction: column;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    #metadata-table,
+    #rekomendasi-table {
+        font-size: 0.8rem;
+    }
+    
+    #metadata-table th,
+    #metadata-table td,
+    #rekomendasi-table th,
+    #rekomendasi-table td {
+        padding: 0.5rem;
+    }
+    
+    /* Tetap pertahankan alignment tengah di mobile */
+    #pembinaan-table td:nth-child(5),
+    #metadata-table td.status-cell,
+    #rekomendasi-table td.status-cell,
+    #pembinaan-table td:nth-child(6) {
+        text-align: center;
+    }
+    
+    /* Header tabel publikasi tetap di tengah di mobile */
+    #pembinaan-table th {
+        text-align: center;
+    }
+    
+    /* Isi tabel publikasi tetap di tengah di mobile */
+    #pembinaan-table td {
+        text-align: center;
+    }
+    
+    /* Kecuali kolom Nama Publikasi dan Tanggal agar tetap rata kiri di mobile */
+    #pembinaan-table td:nth-child(2),
+    #pembinaan-table td:nth-child(3),
+    #pembinaan-table td:nth-child(4) {
+        text-align: left;
     }
 }
