@@ -37,6 +37,208 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeYearFilter();
     });
     
+    // Tambahkan tombol "Ubah Token" di samping tombol kirim feedback
+    const submitButton = feedbackForm.querySelector('.submit-btn');
+    const tokenButton = document.createElement('button');
+    tokenButton.type = 'button';
+    tokenButton.id = 'tokenManagementBtn';
+    tokenButton.className = 'token-btn';
+    tokenButton.textContent = 'Ubah Token';
+    tokenButton.addEventListener('click', showTokenManagementModal);
+    
+    // Buat container untuk kedua tombol
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'form-buttons';
+    buttonContainer.appendChild(submitButton.cloneNode(true));
+    buttonContainer.appendChild(tokenButton);
+    
+    // Ganti tombol submit dengan container tombol
+    submitButton.parentNode.replaceChild(buttonContainer, submitButton);
+    
+    // Fungsi untuk menampilkan modal management token
+    function showTokenManagementModal() {
+        const modal = document.createElement('div');
+        modal.className = 'password-modal';
+        modal.style.display = 'flex';
+        modal.innerHTML = `
+            <div class="password-modal-content" style="max-width: 500px;">
+                <h3>Kelola Token GitHub</h3>
+                <p>Untuk menyimpan data feedback ke cloud (GitHub Gist), masukkan Personal Access Token GitHub Anda.</p>
+                <div class="form-group">
+                    <label for="githubToken">GitHub Personal Access Token</label>
+                    <input type="password" id="githubToken" class="password-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" value="${gistConfig.personalToken || ''}">
+                    <small>
+                        Untuk mendapatkan token, tanyakan kepada admin BPS Kabupaten Paniai
+                    </small>
+                </div>
+                <div class="token-status">
+                    <p>Status: <span id="tokenStatus">${gistConfig.personalToken ? 'Token tersedia' : 'Token tidak tersedia'}</span></p>
+                    <p>Gist ID: <span id="gistIdStatus">${gistConfig.gistId || 'Tidak ada'}</span></p>
+                </div>
+                <div id="tokenInstructions" style="display: none; margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px;">
+                    <h4>Cara Mendapatkan Token GitHub:</h4>
+                    <ol>
+                        <li>Login ke akun GitHub Anda</li>
+                        <li>Klik pada foto profil di pojok kanan atas dan pilih <strong>Settings</strong></li>
+                        <li>Scroll ke bawah dan pilih <strong>Developer settings</strong></li>
+                        <li>Pilih <strong>Personal access tokens</strong> lalu <strong>Tokens (classic)</strong></li>
+                        <li>Klik <strong>Generate new token</strong> dan pilih <strong>Generate new token (classic)</strong></li>
+                        <li>Berikan nama deskriptif untuk token</li>
+                        <li>Pilih expiration (masa berlaku) token</li>
+                        <li>Centang opsi <strong>gist</strong> untuk memberikan izin membuat dan mengelola gists</li>
+                        <li>Klik <strong>Generate token</strong> di bagian bawah halaman</li>
+                        <li>Salin token yang dihasilkan (ini hanya akan ditampilkan sekali)</li>
+                    </ol>
+                </div>
+                <div class="password-modal-buttons">
+                    <button id="testTokenBtn">Tes Koneksi</button>
+                    <button id="saveTokenBtn">Simpan Token</button>
+                    <button id="closeTokenModal">Tutup</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        const tokenInput = modal.querySelector('#githubToken');
+        const saveBtn = modal.querySelector('#saveTokenBtn');
+        const testBtn = modal.querySelector('#testTokenBtn');
+        const closeBtn = modal.querySelector('#closeTokenModal');
+        const showInstructions = modal.querySelector('#showTokenInstructions');
+        const tokenInstructions = modal.querySelector('#tokenInstructions');
+        const tokenStatus = modal.querySelector('#tokenStatus');
+        const gistIdStatus = modal.querySelector('#gistIdStatus');
+        
+        // Event listener untuk tombol tutup
+        closeBtn.addEventListener('click', function() {
+            document.body.removeChild(modal);
+        });
+        
+        // Event listener untuk tombol tes koneksi
+        testBtn.addEventListener('click', async function() {
+            const token = tokenInput.value.trim();
+            if (!token) {
+                alert('Token tidak boleh kosong!');
+                return;
+            }
+            
+            testBtn.textContent = 'Mengecek...';
+            testBtn.disabled = true;
+            
+            try {
+                // Test koneksi dengan token
+                const isValid = await testGistConnection(token);
+                if (isValid) {
+                    alert('Token valid! Koneksi ke GitHub Gist berhasil.');
+                    tokenStatus.textContent = 'Token valid';
+                    tokenStatus.style.color = '#2ecc71';
+                } else {
+                    alert('Token tidak valid atau tidak memiliki izin yang cukup.');
+                    tokenStatus.textContent = 'Token tidak valid';
+                    tokenStatus.style.color = '#e74c3c';
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat menguji koneksi: ' + error.message);
+            } finally {
+                testBtn.textContent = 'Tes Koneksi';
+                testBtn.disabled = false;
+            }
+        });
+        
+        // Event listener untuk tombol simpan
+        saveBtn.addEventListener('click', async function() {
+            const token = tokenInput.value.trim();
+            if (!token) {
+                alert('Token tidak boleh kosong!');
+                return;
+            }
+            
+            saveBtn.textContent = 'Menyimpan...';
+            saveBtn.disabled = true;
+            
+            try {
+                // Test koneksi terlebih dahulu
+                const isValid = await testGistConnection(token);
+                if (!isValid) {
+                    alert('Token tidak valid. Silakan periksa token Anda.');
+                    return;
+                }
+                
+                // Simpan token
+                localStorage.setItem(GIST_TOKEN_KEY, token);
+                gistConfig.personalToken = token;
+                localStorage.setItem(GIST_CONFIG_KEY, JSON.stringify(gistConfig));
+                
+                // Sinkronkan data
+                await saveFeedbackData();
+                
+                alert('Token berhasil disimpan! Data akan disinkronisasi dengan cloud.');
+                tokenStatus.textContent = 'Token tersedia';
+                tokenStatus.style.color = '#2ecc71';
+                
+                // Update gist ID status jika ada
+                if (gistConfig.gistId) {
+                    gistIdStatus.textContent = gistConfig.gistId;
+                    gistIdStatus.style.color = '#2ecc71';
+                }
+                
+            } catch (error) {
+                console.error('Gagal menyimpan token:', error);
+                alert('Gagal menyimpan token: ' + error.message);
+            } finally {
+                saveBtn.textContent = 'Simpan Token';
+                saveBtn.disabled = false;
+            }
+        });
+        
+        // Event listener untuk menampilkan instruksi
+        showInstructions.addEventListener('click', function(e) {
+            e.preventDefault();
+            tokenInstructions.style.display = tokenInstructions.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        // Tutup modal ketika klik di luar area konten
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+    }
+    
+    // Fungsi untuk menguji koneksi Gist
+    async function testGistConnection(token) {
+        try {
+            // Coba akses API GitHub untuk memverifikasi token
+            const response = await fetch('https://api.github.com/user', {
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            
+            if (!response.ok) {
+                return false;
+            }
+            
+            // Jika sudah ada Gist ID, coba akses Gist tersebut
+            if (gistConfig.gistId) {
+                const gistResponse = await fetch(`https://api.github.com/gists/${gistConfig.gistId}`, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                return gistResponse.ok;
+            }
+            
+            return true;
+        } catch (error) {
+            console.error('Error testing Gist connection:', error);
+            return false;
+        }
+    }
+    
     // Fungsi untuk menampilkan modal setup token
     function showTokenSetupModal() {
         const modal = document.createElement('div');
@@ -51,7 +253,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     <input type="password" id="githubToken" class="password-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
                     <small>
                         Untuk mendapatkan token, tanyakan kepada admin BPS Kabupaten Paniai
+                        <a href="#" id="showInstructions">Lihat instruksi</a>
                     </small>
+                </div>
+                <div id="tokenInstructions" style="display: none; margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px;">
+                    <h4>Cara Mendapatkan Token GitHub:</h4>
+                    <ol>
+                        <li>Login ke akun GitHub Anda</li>
+                        <li>Klik pada foto profil di pojok kanan atas dan pilih <strong>Settings</strong></li>
+                        <li>Scroll ke bawah dan pilih <strong>Developer settings</strong></li>
+                        <li>Pilih <strong>Personal access tokens</strong> lalu <strong>Tokens (classic)</strong></li>
+                        <li>Klik <strong>Generate new token</strong> dan pilih <strong>Generate new token (classic)</strong></li>
+                        <li>Berikan nama deskriptif untuk token</li>
+                        <li>Pilih expiration (masa berlaku) token</li>
+                        <li>Centang opsi <strong>gist</strong> untuk memberikan izin membuat dan mengelola gists</li>
+                        <li>Klik <strong>Generate token</strong> di bagian bawah halaman</li>
+                        <li>Salin token yang dihasilkan (ini hanya akan ditampilkan sekali)</li>
+                    </ol>
                 </div>
                 <div class="password-modal-buttons">
                     <button id="saveTokenBtn">Simpan Token</button>
@@ -62,35 +280,61 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(modal);
         
         const tokenInput = modal.querySelector('#githubToken');
-        const skipBtn = modal.querySelector('#skipSetupBtn');
         const saveBtn = modal.querySelector('#saveTokenBtn');
+        const showInstructions = modal.querySelector('#showInstructions');
+        const tokenInstructions = modal.querySelector('#tokenInstructions');
         
-        skipBtn.addEventListener('click', function() {
-            document.body.removeChild(modal);
-            alert('Sinkronisasi cloud dinonaktifkan. Data hanya akan disimpan secara lokal.');
+        showInstructions.addEventListener('click', function(e) {
+            e.preventDefault();
+            tokenInstructions.style.display = tokenInstructions.style.display === 'none' ? 'block' : 'none';
         });
         
-        saveBtn.addEventListener('click', function() {
+        saveBtn.addEventListener('click', async function() {
             const token = tokenInput.value.trim();
             if (!token) {
                 alert('Token tidak boleh kosong!');
                 return;
             }
             
-            // Simpan token
-            localStorage.setItem(GIST_TOKEN_KEY, token);
-            gistConfig.personalToken = token;
-            localStorage.setItem(GIST_CONFIG_KEY, JSON.stringify(gistConfig));
+            // Test koneksi terlebih dahulu
+            saveBtn.textContent = 'Mengecek...';
+            saveBtn.disabled = true;
             
-            document.body.removeChild(modal);
-            alert('Token berhasil disimpan! Data akan disinkronisasi dengan cloud.');
-            
-            // Setelah token disimpan, sinkronkan data
-            loadFeedbackData().then(() => {
-                updateFeedbackStats();
-                updateRecentFeedback();
-                initializeYearFilter();
-            });
+            try {
+                const isValid = await testGistConnection(token);
+                if (!isValid) {
+                    alert('Token tidak valid. Silakan periksa token Anda.');
+                    return;
+                }
+                
+                // Simpan token
+                localStorage.setItem(GIST_TOKEN_KEY, token);
+                gistConfig.personalToken = token;
+                localStorage.setItem(GIST_CONFIG_KEY, JSON.stringify(gistConfig));
+                
+                document.body.removeChild(modal);
+                alert('Token berhasil disimpan! Data akan disinkronisasi dengan cloud.');
+                
+                // Setelah token disimpan, sinkronkan data
+                loadFeedbackData().then(() => {
+                    updateFeedbackStats();
+                    updateRecentFeedback();
+                    initializeYearFilter();
+                });
+            } catch (error) {
+                console.error('Gagal menyimpan token:', error);
+                alert('Gagal menyimpan token: ' + error.message);
+            } finally {
+                saveBtn.textContent = 'Simpan Token';
+                saveBtn.disabled = false;
+            }
+        });
+        
+        // Tutup modal ketika klik di luar area konten
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
         });
     }
     
@@ -653,6 +897,48 @@ document.addEventListener('DOMContentLoaded', function() {
         .password-modal .form-group li {
             margin-bottom: 0.25rem;
         }
+        
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+        
+        .token-btn {
+            background-color: #95a5a6;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .token-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .token-status {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .token-status p {
+            margin: 5px 0;
+        }
+        
+        #tokenStatus {
+            font-weight: bold;
+        }
+        
+        #gistIdStatus {
+            font-family: monospace;
+        }
     `;
     document.head.appendChild(style);
-});
+}); 

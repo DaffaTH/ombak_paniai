@@ -99,6 +99,12 @@
     color: #f8d64e;
 }
 
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
 .submit-btn {
     display: inline-block;
     background-color: var(--primary-color);
@@ -110,11 +116,30 @@
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
+    flex: 2;
 }
 
 .submit-btn:hover {
     background-color: var(--secondary-color);
     transform: translateY(-2px);
+}
+
+.token-btn {
+    display: inline-block;
+    background-color: #95a5a6;
+    color: var(--white);
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    flex: 1;
+}
+
+.token-btn:hover {
+    background-color: #7f8c8d;
 }
 
 .feedback-stats {
@@ -306,8 +331,11 @@
     background-color: white;
     padding: 2rem;
     border-radius: 10px;
-    width: 300px;
+    width: 90%;
+    max-width: 500px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .password-modal h3 {
@@ -334,6 +362,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .password-modal-buttons button {
@@ -341,21 +371,71 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
-.password-modal-buttons button:first-child {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.password-modal-buttons button:last-child {
+.password-modal-buttons button.primary {
     background-color: #3498db;
     color: white;
+}
+
+.password-modal-buttons button:not(.primary) {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.password-modal-buttons button:hover {
+    opacity: 0.9;
+}
+
+.token-status {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.token-status p {
+    margin: 0.5rem 0;
+}
+
+#tokenInstructions {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+#tokenInstructions h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+#tokenInstructions ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+#tokenInstructions li {
+    margin-bottom: 0.5rem;
+}
+
+.no-feedback {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    padding: 2rem;
 }
 
 @media screen and (max-width: 992px) {
     .feedback-content {
         grid-template-columns: 1fr;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
     }
 }
 
@@ -373,5 +453,13 @@
     .feedback-actions {
         width: 100%;
         justify-content: flex-end;
+    }
+    
+    .password-modal-buttons {
+        flex-direction: column;
+    }
+    
+    .password-modal-buttons button {
+        width: 100%;
     }
 }

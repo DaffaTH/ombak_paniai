@@ -109,7 +109,9 @@
                         <label for="comments">Komentar/Saran</label>
                         <textarea id="comments" name="comments" rows="5"></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Kirim Feedback</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Kirim Feedback</button>
+                    </div>
                 </form>
             </div>
 
@@ -137,6 +139,46 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal untuk mengubah token -->
+    <div id="tokenModal" class="password-modal">
+        <div class="password-modal-content" style="max-width: 500px;">
+            <h3>Kelola Token GitHub</h3>
+            <div class="form-group">
+                <label for="githubTokenInput">GitHub Personal Access Token</label>
+                <input type="password" id="githubTokenInput" class="password-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                <small>
+                    Token digunakan untuk menyimpan data feedback ke GitHub Gist. 
+                    <a href="#" id="showInstructions">Lihat cara mendapatkan token</a>
+                </small>
+            </div>
+            <div class="token-status">
+                <p>Status: <span id="tokenStatus">Tidak diketahui</span></p>
+                <p>Gist ID: <span id="gistIdStatus">Tidak ada</span></p>
+            </div>
+            <div class="password-modal-buttons">
+                <button id="testTokenBtn">Tes Koneksi</button>
+                <button id="saveTokenBtn" class="primary">Simpan Token</button>
+                <button id="closeTokenModal">Tutup</button>
+            </div>
+            
+            <div id="tokenInstructions" style="display: none; margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                <h4>Cara Mendapatkan Token GitHub:</h4>
+                <ol>
+                    <li>Login ke akun GitHub Anda</li>
+                    <li>Klik pada foto profil di pojok kanan atas dan pilih <strong>Settings</strong></li>
+                    <li>Scroll ke bawah dan pilih <strong>Developer settings</strong></li>
+                    <li>Pilih <strong>Personal access tokens</strong> lalu <strong>Tokens (classic)</strong></li>
+                    <li>Klik <strong>Generate new token</strong> dan pilih <strong>Generate new token (classic)</strong></li>
+                    <li>Berikan nama deskriptif untuk token</li>
+                    <li>Pilih expiration (masa berlaku) token</li>
+                    <li>Centang opsi <strong>gist</strong> untuk memberikan izin membuat dan mengelola gists</li>
+                    <li>Klik <strong>Generate token</strong> di bagian bawah halaman</li>
+                    <li>Salin token yang dihasilkan (ini hanya akan ditampilkan sekali)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
